@@ -9,10 +9,8 @@
     "astro": "astro"
   },
   "dependencies": {
-    "@types/openlayers": "^4.6.23",
     "astro": "^5.7.4",
-    "leaflet": "^1.9.4",
-    "ol": "^10.5.0"
+    "leaflet": "^1.9.4"
   },
   "devDependencies": {
     "@types/leaflet": "^1.9.17"
