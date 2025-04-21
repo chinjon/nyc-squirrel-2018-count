@@ -25,6 +25,14 @@
     fillOpacity: 0.8,
   };
 
+  const cinnamon = {
+    fillColor: "#D27D2D",
+  };
+
+  const gray = {
+    fillColor: "#808080",
+  };
+
   const map = L.map("map").setView([40.785091, -73.968285], 14);
 
   L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
@@ -35,7 +43,21 @@
 
   L.geoJSON(data, {
     pointToLayer: function (feature, latlng) {
-      return L.circleMarker(latlng, geojsonMarkerOptions);
+      const furColor = feature.properties.primary_fur_color
+        ? feature.properties.primary_fur_color.toLowerCase()
+        : "none";
+      if (furColor === "cinnamon") {
+        return L.circleMarker(latlng, { ...geojsonMarkerOptions, ...cinnamon });
+      } else if (furColor === "gray") {
+        return L.circleMarker(latlng, { ...geojsonMarkerOptions, ...gray });
+      } else if (furColor === "black") {
+        return L.circleMarker(latlng, {
+          ...geojsonMarkerOptions,
+          ...{ fillColor: "#000000" },
+        });
+      } else {
+        return L.circleMarker(latlng, geojsonMarkerOptions);
+      }
     },
   }).addTo(map);
 </script>
